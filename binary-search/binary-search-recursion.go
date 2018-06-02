@@ -9,6 +9,7 @@
  compare the middle element of the array with the target value
 
  divide and search based on value
+
  */
 
 package main
