@@ -1,6 +1,17 @@
+// TRIE: Prefix tree
+// variant of a n-ary tree where chharacters are stored at each node
+// each path down the tree represents a word
+// we need to have a terminating indicator
+
 package trie
 
-const SIZE = 26
+import "strings"
+
+const (
+	SIZE  = 26
+	UPPER = 'A'
+	LOWER = 'a'
+)
 
 type TrieNode struct {
 	Links       []*TrieNode
@@ -18,8 +29,15 @@ func (tn *TrieNode) Insert(word string) {
 	}
 	crawler := tn
 
+	var first rune
+	if word == strings.ToUpper(word) {
+		first = UPPER
+	} else {
+		first = LOWER
+	}
+
 	for _, character := range word {
-		index := character - 'A'
+		index := character - first
 		if crawler.Links[index] == nil {
 			crawler.Links[index] = NewTrieNode()
 		}

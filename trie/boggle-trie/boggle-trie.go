@@ -45,7 +45,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/mariadesouza/data-structures-and-alogorithms/trie"
+	"github.com/mariadesouza/algorithms/trie"
 )
 
 const (
@@ -54,7 +54,7 @@ const (
 )
 
 func main() {
-	fmt.Println("Start")
+	fmt.Println("Boggle Board")
 
 	dictionary := []string{"GEEKS", "FOR", "QUIZ", "GO"}
 	root := trie.NewTrieNode()
@@ -62,21 +62,30 @@ func main() {
 		root.Insert(word)
 	}
 
-	boggle := [M][N]rune{{'G', 'I', 'Z'},
+	boggle := [M][N]rune{
+		{'G', 'I', 'Z'},
 		{'U', 'E', 'K'},
 		{'Q', 'S', 'E'},
 	}
+	for _, row := range boggle {
+		for _, col := range row {
+			fmt.Printf("%c ", col)
+		}
+		fmt.Println("")
+	}
+	fmt.Println("")
 	//search on the board
 
 	var visited [M][N]bool
-
+	fmt.Println("Searching words on the board")
 	crawler := root
 	for i := 0; i < M; i++ {
 		for j := 0; j < N; j++ {
 			index := boggle[i][j] - 'A'
 			//fmt.Println(string(boggle[i][j]))
 			if crawler.Links[index] != nil {
-				fmt.Println(string(boggle[i][j]))
+				//fmt.Println(string(boggle[i][j]))
+
 				searchWord(crawler.Links[index], boggle, i, j, string(boggle[i][j]), visited)
 			}
 		}
